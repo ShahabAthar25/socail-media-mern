@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
 
+const postRouter = require("./routes/posts");
+
 dotenv.config();
 
 const app = express();
@@ -21,6 +23,8 @@ app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ limit: "1mb", extended: true }));
 app.use(cors());
 app.use(morgan("common"));
+
+app.use("/posts", postRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
