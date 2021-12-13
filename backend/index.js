@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 
 const authRoutes = require("./routes/auth");
+const postRoutes = require("./routes/post");
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(cors());
 app.use(morgan("common"));
 
 app.use("/api/auth", authRoutes);
+app.use("/api/posts", postRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
