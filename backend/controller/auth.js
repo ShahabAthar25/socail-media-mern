@@ -1,6 +1,7 @@
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const { registerValidation } = require("../utils/validation");
+const { registerValidation, loginValidation } = require("../utils/validation");
 const User = require("../models/User");
 
 // Registering a user
@@ -10,11 +11,9 @@ const register = async (req, res) => {
   if (error) return res.status(400).send({ message: error.details[0].message });
 
   try {
-    // Checking if username exists
     const userExist = await User.findOne({ username: req.body.username });
     if (userExist) return res.status(400).send("Username already exists");
 
-    // Checking if email exists
     const emailExist = await User.findOne({ email: req.body.email });
     if (emailExist) return res.status(400).send("Email already exists");
 
@@ -31,12 +30,35 @@ const register = async (req, res) => {
 
     // saving user
     const user = await newUser.save();
-    res.send({ message: user });
+    res.send(user);
   } catch (err) {
     res.status(500).send({ message: err });
   }
 };
 
+const login = async (req, res) => {
+  // Validating Request
+  const { error } = loginValidation(req.body);
+  if (error) return res.status(400).send({ message: error.details[0].message });
+
+  // checking if email is correct
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) return res.status(404).send({ message: "Wrong credentials" });
+
+  // checking if password is correct
+  const validPassword = await bcrypt.compare(req.body.password, user.password);
+  if (!validPassword)
+    return res.status(404).send({ message: "Wrong credentials" });
+
+  // genrating a jwt
+  const token = jwt.sign(
+    { _id: user._id, username: user.username },
+    process.env.SECRET_KEY
+  );
+  res.send({ token: token });
+};
+
 module.exports = {
   register,
+  login,
 };
