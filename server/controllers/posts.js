@@ -12,12 +12,13 @@ const getPosts = async (req, res) => {
 
 const createPost = async (req, res) => {
   try {
-    const post = await Post(req.body);
+    const post = new Post(req.body);
 
     const newPost = await post.save();
 
     res.status(201).send({ message: newPost });
   } catch (error) {
+    console.log(error);
     res.status(500).send({ message: error });
   }
 };
