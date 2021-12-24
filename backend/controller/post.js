@@ -44,12 +44,22 @@ const updatePost = async (req, res) => {
     });
     res.send({ message: "Post has been updated" });
   } catch (error) {
-    res.send({ error: error });
+    res.status(500).send({ error: error });
   }
 };
 
-const deletePost = (req, res) => {
-  res.send({ message: "Hello World" });
+const deletePost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (req.user._id === post.userId) {
+      const deletedPost = await post.deleteOne();
+      res.send({ message: "Post has been deleted" });
+    } else {
+      res.status(403).send({ message: "You can only update your post" });
+    }
+  } catch (error) {
+    res.status(500).send({ error: error });
+  }
 };
 
 module.exports = {

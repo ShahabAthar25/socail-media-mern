@@ -7,6 +7,6 @@ router.get("/me", isAuthenticated, controller.getUserPosts);
 router.get("/:id", controller.getPost);
 router.post("/", isAuthenticated, controller.createPost);
 router.put("/:id", isAuthenticated, controller.updatePost);
-router.delete("/:id", isAuthenticated, controller.updatePost);
+router.delete("/:id", isAuthenticated, controller.deletePost);
 
 module.exports = router;
