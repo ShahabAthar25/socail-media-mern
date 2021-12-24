@@ -62,10 +62,30 @@ const deletePost = async (req, res) => {
   }
 };
 
+const likePost = async (req, res) => {
+  res.send({ message: "Hello World" });
+};
+
+const comment = async (req, res) => {
+  res.send({ message: "Hello World" });
+};
+
+const updateComment = async (req, res) => {
+  res.send({ message: "Hello World" });
+};
+
+const postComments = async (req, res) => {
+  res.send({ message: "Hello World" });
+};
+
 module.exports = {
   getUserPosts,
   getPost,
   createPost,
   updatePost,
   deletePost,
+  likePost,
+  comment,
+  updateComment,
+  postComments,
 };
