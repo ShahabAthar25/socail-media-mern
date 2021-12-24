@@ -20,12 +20,32 @@ const getPost = async (req, res) => {
   }
 };
 
-const createPost = (req, res) => {
-  res.send({ message: "Hello World" });
+const createPost = async (req, res) => {
+  try {
+    const newPost = new Post({
+      title: req.body.title,
+      body: req.body.body,
+      image: req.body.file,
+      username: req.user.username,
+      userId: req.user._id,
+    });
+
+    const post = await newPost.save();
+    res.send({ message: post });
+  } catch (error) {
+    res.send({ error: error });
+  }
 };
 
-const updatePost = (req, res) => {
-  res.send({ message: "Hello World" });
+const updatePost = async (req, res) => {
+  try {
+    const updatedPost = await Post.findOneAndUpdate(req.params.id, {
+      $set: req.body,
+    });
+    res.send({ message: "Post has been updated" });
+  } catch (error) {
+    res.send({ error: error });
+  }
 };
 
 const deletePost = (req, res) => {
