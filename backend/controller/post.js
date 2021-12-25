@@ -111,7 +111,13 @@ const updateComment = async (req, res) => {
 };
 
 const postComments = async (req, res) => {
-  res.send({ message: "Hello World" });
+  try {
+    const comments = await Comment.find({ postId: req.params.id });
+
+    res.send({ message: comments });
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
 };
 
 module.exports = {
