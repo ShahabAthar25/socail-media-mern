@@ -31,3 +31,12 @@ module.exports.postValidation = (data) => {
 
   return schema.validate(data);
 };
+
+// comment validation schema
+module.exports.commentValidation = (data) => {
+  const schema = Joi.object({
+    body: Joi.string().required().min(1),
+  });
+
+  return schema.validate(data);
+};

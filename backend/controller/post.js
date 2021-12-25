@@ -1,4 +1,6 @@
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
+const { postValidation, commentValidation } = require("../utils/validation");
 
 const getUserPosts = async (req, res) => {
   try {
@@ -22,10 +24,13 @@ const getPost = async (req, res) => {
 
 const createPost = async (req, res) => {
   try {
+    const { error } = postValidation(req.body);
+    if (error) return res.status(400).send({ error: error.details[0].message });
+
     const newPost = new Post({
       title: req.body.title,
       body: req.body.body,
-      image: req.body.file,
+      image: req.files.file,
       username: req.user.username,
       userId: req.user._id,
     });
@@ -63,11 +68,42 @@ const deletePost = async (req, res) => {
 };
 
 const likePost = async (req, res) => {
-  res.send({ message: "Hello World" });
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post.likes.includes(req.user._id)) {
+      const likedPost = await post.updateOne({
+        $push: { likes: req.user._id },
+      });
+      res.status(200).send({ message: "The post has been liked" });
+    } else {
+      const dislikedPost = await post.updateOne({
+        $pull: { likes: req.user._id },
+      });
+      res.status(200).send({ message: "The post has been disliked" });
+    }
+  } catch (error) {
+    res.status(500).send({ error: error });
+  }
 };
 
 const comment = async (req, res) => {
-  res.send({ message: "Hello World" });
+  try {
+    const { error } = commentValidation(req.body);
+    if (error) return res.status(400).send({ error: error.details[0].message });
+
+    const newComment = new Comment({
+      username: req.user.username,
+      userId: req.user._id,
+      postId: req.params.id,
+      body: req.body.body,
+    });
+
+    const comment = await newComment.save();
+
+    res.send({ message: comment });
+  } catch (error) {
+    res.status(500).send({ error: error });
+  }
 };
 
 const updateComment = async (req, res) => {
