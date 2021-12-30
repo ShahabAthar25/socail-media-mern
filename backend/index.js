@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/post");
+const commentRoutes = require("./routes/comment");
 
 dotenv.config();
 
@@ -16,13 +17,14 @@ mongoose.connect(process.env.MONGO_URL, () => {
   console.log("Connected to database");
 });
 
-app.use(express.json({ limit: "50kb" }));
+app.use(express.json({ limit: "50kb", extended: true }));
 app.use(express.urlencoded({ limit: "50kb", extended: true }));
 app.use(cors());
 app.use(morgan("common"));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

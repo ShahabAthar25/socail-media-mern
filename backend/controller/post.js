@@ -1,6 +1,5 @@
 const Post = require("../models/Post");
-const Comment = require("../models/Comment");
-const { postValidation, commentValidation } = require("../utils/validation");
+const { postValidation } = require("../utils/validation");
 
 const getUserPosts = async (req, res) => {
   try {
@@ -86,40 +85,6 @@ const likePost = async (req, res) => {
   }
 };
 
-const comment = async (req, res) => {
-  try {
-    const { error } = commentValidation(req.body);
-    if (error) return res.status(400).send({ error: error.details[0].message });
-
-    const newComment = new Comment({
-      username: req.user.username,
-      userId: req.user._id,
-      postId: req.params.id,
-      body: req.body.body,
-    });
-
-    const comment = await newComment.save();
-
-    res.send({ message: comment });
-  } catch (error) {
-    res.status(500).send({ error: error });
-  }
-};
-
-const updateComment = async (req, res) => {
-  res.send({ message: "Hello World" });
-};
-
-const postComments = async (req, res) => {
-  try {
-    const comments = await Comment.find({ postId: req.params.id });
-
-    res.send({ message: comments });
-  } catch (error) {
-    res.status(400).send({ error: error });
-  }
-};
-
 module.exports = {
   getUserPosts,
   getPost,
@@ -127,7 +92,4 @@ module.exports = {
   updatePost,
   deletePost,
   likePost,
-  comment,
-  updateComment,
-  postComments,
 };
