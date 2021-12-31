@@ -7,7 +7,6 @@ router.get("/me", isAuthenticated, controller.getCurrentUserProfile);
 router.get("/:id", isAuthenticated, controller.getUserProfile);
 router.put("/:id", isAuthenticated, controller.updateUser);
 router.delete("/:id", isAuthenticated, controller.deleteUser);
-router.put("/:id/follow", isAuthenticated, controller.followUser);
-router.put("/me/followers", isAuthenticated, controller.getUserFollowers);
+router.put("/follow/:id", isAuthenticated, controller.followUser);
 
 module.exports = router;
