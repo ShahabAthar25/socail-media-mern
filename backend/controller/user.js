@@ -49,7 +49,7 @@ const updateUser = async (req, res) => {
       $set: req.body,
     });
 
-    res.send({ message: updatedUser });
+    res.send({ message: "User has been updated" });
   } catch (error) {
     res.status(500).send({ message: error });
   }
