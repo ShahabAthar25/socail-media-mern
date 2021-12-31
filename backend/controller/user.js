@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 
 const User = require("../models/User");
+const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 
 // getting current user profile
 const getCurrentUserProfile = async (req, res) => {
@@ -55,8 +57,20 @@ const updateUser = async (req, res) => {
   }
 };
 
-const deleteUser = (req, res) => {
-  res.send({ message: "Hello World" });
+// Deleting the user
+const deleteUser = async (req, res) => {
+  try {
+    // Deleting the user
+    const deletedUser = await User.findOneAndDelete(req.user._id);
+    // Deleting the users posts
+    const deletedPost = await Post.deleteMany({ userId: req.user._id });
+    // Deleting the users comment
+    const deletedComment = await Comment.deleteMany({ userId: req.user._id });
+
+    res.send({ message: "User has been deleted" });
+  } catch (error) {
+    res.status(500).send({ message: error });
+  }
 };
 
 const followUser = (req, res) => {
