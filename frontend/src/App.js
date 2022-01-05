@@ -1,7 +1,15 @@
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import Login from "./pages/Login";
+
 function App() {
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <Router>
+        <Switch>
+          <Route path="/login" exact component={Login} />
+        </Switch>
+      </Router>
     </div>
   );
 }
