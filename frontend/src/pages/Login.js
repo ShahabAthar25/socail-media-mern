@@ -4,7 +4,7 @@ export default function Login() {
   return (
     <div className="bg-[#F0F2F5] w-screen min-h-screen flex flex-col lg:flex-row justify-center items-center space-y-8 md:space-x-8">
       <div className="flex flex-col max-w-md xl:max-w-xl text-center lg:text-left">
-        <h1 className="text-[#1877F2] text-4xl md:text-7xl font-bold">
+        <h1 className="text-[#1877F2] text-6xl md:text-7xl font-bold">
           facebook
         </h1>
         <p className="font-light text-2xl md:text-3xl">
