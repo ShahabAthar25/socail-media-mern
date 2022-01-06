@@ -32,7 +32,7 @@ export default function Navbar() {
             className="bg-transparent focus:outline-none"
           />
         </form>
-        <div className="hover:bg-[#F0F2F5] mx-5 p-2 rounded-lg sm:hidden">
+        <div className="hover:bg-[#F0F2F5] mx-3 p-2 rounded-lg sm:hidden">
           <MenuIcon className="h-8" />
         </div>
       </div>
@@ -54,13 +54,13 @@ export default function Navbar() {
         </div>
       </div>
       <div className="flex space-x-2">
-        <div className="bg-[#D8DADF] hover:bg-[#d3d4d6] p-2 rounded-full">
+        <div className="bg-[#D8DADF] hover:bg-[#d3d4d6] p-2 rounded-full hidden sm:flex">
           <PlusIcon className="h-6" />
         </div>
         <div className="bg-[#D8DADF] hover:bg-[#d3d4d6] p-2 rounded-full">
           <ChatIcon className="h-6" />
         </div>
-        <div className="bg-[#D8DADF] hover:bg-[#d3d4d6] p-2 rounded-full">
+        <div className="bg-[#D8DADF] hover:bg-[#d3d4d6] p-2 rounded-full hidden sm:flex">
           <BellIcon className="h-6" />
         </div>
         <div className="bg-[#D8DADF] hover:bg-[#d3d4d6] p-2 rounded-full">
