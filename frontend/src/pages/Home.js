@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
+import Navbar from "../components/Navbar";
+
 export default function Home() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
@@ -10,7 +12,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Home</h1>
+      <Navbar />
     </div>
   );
 }

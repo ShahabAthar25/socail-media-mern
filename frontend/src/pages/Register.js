@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, Link, useHistory } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import { register } from "../redux/actions/auth";
 
