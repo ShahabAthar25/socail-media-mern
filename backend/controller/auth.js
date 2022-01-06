@@ -12,10 +12,12 @@ const register = async (req, res) => {
 
   try {
     const userExist = await User.findOne({ username: req.body.username });
-    if (userExist) return res.status(400).send("Username already exists");
+    if (userExist)
+      return res.status(400).send({ error: "Username already exists" });
 
     const emailExist = await User.findOne({ email: req.body.email });
-    if (emailExist) return res.status(400).send("Email already exists");
+    if (emailExist)
+      return res.status(400).send({ error: "Email already exists" });
 
     // genrate hashed password
     const salt = await bcrypt.genSalt(10);
@@ -44,7 +46,7 @@ const login = async (req, res) => {
 
     // checking if email is correct
     const user = await User.findOne({ email: req.body.email });
-    if (!user) return res.status(404).send({ message: "Wrong credentials" });
+    if (!user) return res.status(404).send({ error: "Wrong credentials" });
 
     // checking if password is correct
     const validPassword = await bcrypt.compare(
@@ -52,7 +54,7 @@ const login = async (req, res) => {
       user.password
     );
     if (!validPassword)
-      return res.status(404).send({ message: "Wrong credentials" });
+      return res.status(404).send({ error: "Wrong credentials" });
 
     // genrating a jwt
     const token = jwt.sign(

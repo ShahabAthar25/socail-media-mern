@@ -2,14 +2,13 @@ import { LOGIN, REGISTER } from "../constants/actionTypes";
 
 const initailState = {
   isLoggedIn: false,
-  username: null,
   token: null,
 };
 
 export default (state = initailState, action) => {
   switch (action.type) {
     case LOGIN:
-      return state;
+      return { isLoggedIn: true, token: action.payload.token };
     case REGISTER:
       return state;
     default:
