@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import { login } from "../redux/actions/auth";
 
@@ -9,9 +9,9 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const errorMessage = useSelector((state) => state.error);
   const user = useSelector((state) => state.auth);
-  console.log(user);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -65,11 +65,11 @@ export default function Login() {
         </form>
         <div className="flex-grow border border-gray-200 mt-4"></div>
         <div className="flex-grow flex justify-center items-center">
-          <a href="/register">
+          <Link to="/register">
             <button className="bg-[#42A421] hover:bg-[#388b0f] transition-all duration-300 px-4 py-3 rounded-lg mt-4 text-white text-xl font-bold max-w-xs">
               Create New Account
             </button>
-          </a>
+          </Link>
         </div>
       </div>
     </div>
