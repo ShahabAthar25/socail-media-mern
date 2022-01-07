@@ -16,10 +16,10 @@ import { ReactComponent as Watch } from "../images/watch.svg";
 
 export default function Navbar() {
   return (
-    <div className="shadow-lg px-4 py-1 flex items-center justify-between">
+    <div className="shadow-lg px-4 py-1 flex items-center justify-between bg-white">
       <div className="flex">
         <div className="space-x-2 flex items-center">
-          <Logo className="" />
+          <Logo />
           <div className="text-gray-400 bg-[#F0F2F5] rounded-full p-2 md:hidden">
             <SearchIcon className="h-6" />
           </div>
