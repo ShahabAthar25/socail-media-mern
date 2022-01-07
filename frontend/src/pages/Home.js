@@ -32,6 +32,10 @@ export default function Home() {
     dispatch(getPosts(user.token));
   }, [dispatch, user.token]);
 
+  const handlePost = (e) => {
+    e.preventDefault();
+  };
+
   if (!user.isLoggedIn) {
     return <Redirect to="/login" />;
   }
@@ -60,11 +64,18 @@ export default function Home() {
             ) : (
               <img src={user.image} alt="" />
             )}
-            <input
-              type="text"
-              placeholder={`What's on your mind, ${user.username}?`}
-              className="bg-[#F0F2F5] px-3 py-2 flex-grow rounded-full focus:outline-none"
-            />
+            <form className="flex flex-grow">
+              <input
+                type="text"
+                placeholder={`What's on your mind, ${user.username}?`}
+                className="bg-[#F0F2F5] px-3 py-2 flex-grow rounded-full focus:outline-none w-1"
+              />
+              <button
+                type="submit"
+                className="hidden"
+                onClick={handlePost}
+              ></button>
+            </form>
           </div>
           <div className="border border-gray-200 flex-grow my-2"></div>
           <div className="grid grid-cols-3 gap-1">
@@ -86,7 +97,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col">
           {posts.map((post) => (
             <Post
               key={post._id}
