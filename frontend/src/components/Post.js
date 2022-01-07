@@ -16,7 +16,10 @@ function Post({ body, image, username, userImage, userId, _id, createdOn }) {
           ) : (
             <img src={userImage} alt="" />
           )}
-          <h1 className="font-bold">{username}</h1>
+          <div className="flex flex-col">
+            <h1 className="font-bold">{username}</h1>
+            <p className="font-bold text-gray-600 text-xs">{createdOn}</p>
+          </div>
         </div>
         <button>
           <DotsHorizontalIcon className="h-6 text-gray-600" />

@@ -97,7 +97,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col space-y-4">
           {posts.map((post) => (
             <Post
               key={post._id}
@@ -107,7 +107,7 @@ export default function Home() {
               userImage={post.userImage}
               userId={post.userId}
               _id={post._id}
-              date={post.createdOn}
+              createdOn={post.createdOn}
             />
           ))}
         </div>
