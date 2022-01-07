@@ -2,6 +2,19 @@
 const Post = require("../models/Post");
 const { postValidation } = require("../utils/validation");
 
+// Getting all posts
+const getPosts = async (req, res) => {
+  try {
+    // finding all posts
+    const posts = await Post.find();
+
+    // sending posts back
+    res.send({ message: posts });
+  } catch (error) {
+    res.status(500).send({ error: error });
+  }
+};
+
 // Getting user posts
 const getUserPosts = async (req, res) => {
   try {
@@ -135,6 +148,7 @@ const likePost = async (req, res) => {
 
 // exporting all functions
 module.exports = {
+  getPosts,
   getUserPosts,
   getPost,
   createPost,

@@ -39,16 +39,18 @@ export default function Home() {
             <div className="p-2 bg-[#DBE7F2] rounded-full">
               <PlusIcon className="h-6 text-[#056BE1]" />
             </div>
-            <div className="flex flex-col space-y-1">
+            <div className="flex flex-col">
               <h1 className="font-bold">Create Story</h1>
-              <p className="font-light">Share a photo or write something.</p>
+              <p className="font-light text-gray-600">
+                Share a photo or write something.
+              </p>
             </div>
           </div>
         </div>
         <div className="flex flex-col rounded-xl bg-white px-3 py-2">
           <div className="flex items-center">
             {user.image === "" ? (
-              <UserCircleIcon className="h-12 text-gray-400" />
+              <UserCircleIcon className="h-12 text-gray-300" />
             ) : (
               <img src={user.image} alt="" />
             )}
@@ -60,17 +62,17 @@ export default function Home() {
           </div>
           <div className="border border-gray-200 flex-grow my-2"></div>
           <div className="grid grid-cols-3 gap-1">
-            <div className="flex p-2 space-x-4 hover:bg-[#F0F2F5] cursor-pointer rounded-lg">
+            <div className="flex items-center justify-center p-2 space-x-4 hover:bg-[#F0F2F5] cursor-pointer rounded-lg">
               <VideoIcon className="fill-[#E8435A]" />
               <h1 className="text-gray-600 font-medium truncate">Live Video</h1>
             </div>
-            <div className="flex p-2 space-x-4 hover:bg-[#F0F2F5] cursor-pointer rounded-lg">
+            <div className="flex items-center justify-center p-2 space-x-4 hover:bg-[#F0F2F5] cursor-pointer rounded-lg">
               <PhotoIcon className="fill-[#44B35D]" />
               <h1 className="text-gray-600 font-medium truncate">
                 Photo/Video
               </h1>
             </div>
-            <div className="flex p-2 space-x-4 hover:bg-[#F0F2F5] cursor-pointer rounded-lg">
+            <div className="flex items-center justify-center p-2 space-x-4 hover:bg-[#F0F2F5] cursor-pointer rounded-lg">
               <FeelingIcon className="fill-[#EAB134]" />
               <h1 className="text-gray-600 font-medium truncate">
                 Feeling/Activity
