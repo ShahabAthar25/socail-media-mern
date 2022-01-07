@@ -7,3 +7,5 @@ export const GET_CURRENT_USER = "GET_CURRENT_USER";
 export const GET_USER = "GET_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const DELETE_USER = "DELETE_USER";
+export const GET_POSTS = "GET_POSTS";
+export const GET_POST = "GET_POST";

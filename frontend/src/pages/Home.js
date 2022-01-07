@@ -5,7 +5,9 @@ import { PlusIcon } from "@heroicons/react/outline";
 import { UserCircleIcon } from "@heroicons/react/solid";
 
 import Navbar from "../components/Navbar";
+import Post from "../components/Post";
 import { getCurrentUser } from "../redux/actions/user";
+import { getPosts } from "../redux/actions/post";
 import { ReactComponent as VideoIcon } from "../images/video.svg";
 import { ReactComponent as PhotoIcon } from "../images/photo.svg";
 import { ReactComponent as FeelingIcon } from "../images/feeling.svg";
@@ -22,8 +24,11 @@ export default function Home() {
     followings: state.user.followings,
   }));
 
+  const posts = useSelector((state) => state.posts);
+
   useEffect(() => {
     dispatch(getCurrentUser(user.token));
+    dispatch(getPosts(user.token));
   }, [dispatch, user.token]);
 
   if (!user.isLoggedIn) {
@@ -79,6 +84,20 @@ export default function Home() {
               </h1>
             </div>
           </div>
+        </div>
+        <div className="flex flex-col">
+          {posts.map((post) => (
+            <Post
+              key={post._id}
+              body={post.body}
+              image={post.image}
+              username={post.username}
+              userImage={post.userImage}
+              userId={post.userId}
+              _id={post._id}
+              date={post.createdOn}
+            />
+          ))}
         </div>
       </div>
     </div>

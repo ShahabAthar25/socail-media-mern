@@ -24,8 +24,7 @@ module.exports.loginValidation = (data) => {
 // post validation schema
 module.exports.postValidation = (data) => {
   const schema = Joi.object({
-    title: Joi.string().required(),
-    body: Joi.string(),
+    body: Joi.string().required(),
     image: Joi.string(),
   });
 

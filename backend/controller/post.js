@@ -1,5 +1,6 @@
 // Imports
 const Post = require("../models/Post");
+const User = require("../models/User");
 const { postValidation } = require("../utils/validation");
 
 // Getting all posts
@@ -46,6 +47,8 @@ const getPost = async (req, res) => {
 // creating posts
 const createPost = async (req, res) => {
   try {
+    const user = await User.findById(req.user._id);
+
     // checking if the req.body containsevery field we want
     const { error } = postValidation(req.body);
     // send the error message instead of the error object
@@ -57,6 +60,7 @@ const createPost = async (req, res) => {
       body: req.body.body,
       image: req.body.file,
       username: req.user.username,
+      userImage: user.image,
       userId: req.user._id,
     });
 

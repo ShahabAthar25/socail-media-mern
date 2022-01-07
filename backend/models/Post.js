@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const moment = require("moment");
 
 const postSchema = mongoose.Schema({
   username: {
@@ -7,11 +8,11 @@ const postSchema = mongoose.Schema({
     min: 3,
     max: 60,
   },
-  userId: {
+  userImage: {
     type: String,
     require: true,
   },
-  title: {
+  userId: {
     type: String,
     require: true,
   },
@@ -25,6 +26,10 @@ const postSchema = mongoose.Schema({
   likes: {
     type: Array,
     default: [],
+  },
+  createdOn: {
+    type: String,
+    default: moment().format("DD MM YYYY"),
   },
 });
 
