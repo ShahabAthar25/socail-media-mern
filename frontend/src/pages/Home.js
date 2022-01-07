@@ -24,7 +24,8 @@ export default function Home() {
     followings: state.user.followings,
   }));
 
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector((state) => state.posts[0]);
+  console.log(posts);
 
   useEffect(() => {
     dispatch(getCurrentUser(user.token));
@@ -85,7 +86,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col space-y-4">
           {posts.map((post) => (
             <Post
               key={post._id}

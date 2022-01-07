@@ -7,7 +7,7 @@ const { postValidation } = require("../utils/validation");
 const getPosts = async (req, res) => {
   try {
     // finding all posts
-    const posts = await Post.find();
+    const posts = await Post.find({});
 
     // sending posts back
     res.send({ message: posts });
@@ -71,7 +71,7 @@ const createPost = async (req, res) => {
     res.send({ message: post });
   } catch (error) {
     // sending error if any
-    res.send({ error: error });
+    res.status(500).send({ error: error });
   }
 };
 

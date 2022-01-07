@@ -1,4 +1,4 @@
-import { GET_POSTS, GET_POST } from "../constants/actionTypes";
+import { GET_POSTS, GET_POST, CREATE_POST } from "../constants/actionTypes";
 
 const initailState = [];
 
@@ -8,6 +8,8 @@ export default (state = initailState, action) => {
       return [action.payload];
     case GET_POST:
       return state;
+    case CREATE_POST:
+      return [...state, action.payload];
     default:
       return state;
   }
